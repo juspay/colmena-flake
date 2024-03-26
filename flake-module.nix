@@ -54,6 +54,8 @@
           deployment = config.colmena-parts.deployment.${name};
         }];
       })
-      self.nixosConfigurations;
+      (lib.filterAttrs
+        (k: _: lib.hasAttr k config.colmena-parts.deployment)
+        self.nixosConfigurations);
   };
 }
