@@ -36,13 +36,13 @@
 
   config.flake = {
     colmena-parts = {
-      inherit (config.colmena-parts) system sshConn;
+      inherit (config.colmena-parts) sshConn;
     };
 
     colmena = {
       meta = {
         nixpkgs = import inputs.nixpkgs {
-          inherit system;
+          inherit (config.colmena-parts) system;
           overlays = [ ];
         };
         # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
