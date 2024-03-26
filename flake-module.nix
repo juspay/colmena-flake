@@ -2,7 +2,7 @@
 
 {
   options = {
-    colmena-parts = lib.mkOption {
+    colmena-flake = lib.mkOption {
       default = { };
       type = lib.types.submodule {
         options = {
@@ -26,7 +26,7 @@
             description = ''
               The SSH connection string for colmena nodes
             '';
-            default = builtins.mapAttrs (_: v: "${v.targetUser}@${v.targetHost}") config.colmena-parts.deployment;
+            default = builtins.mapAttrs (_: v: "${v.targetUser}@${v.targetHost}") config.colmena-flake.deployment;
             readOnly = true;
           };
         };
@@ -35,14 +35,14 @@
   };
 
   config.flake = {
-    colmena-parts = {
-      inherit (config.colmena-parts) sshConn;
+    colmena-flake = {
+      inherit (config.colmena-flake) sshConn;
     };
 
     colmena = {
       meta = {
         nixpkgs = import inputs.nixpkgs {
-          inherit (config.colmena-parts) system;
+          inherit (config.colmena-flake) system;
           overlays = [ ];
         };
         # https://github.com/zhaofengli/colmena/issues/60#issuecomment-1510496861
@@ -51,11 +51,11 @@
     } // builtins.mapAttrs
       (name: value: {
         imports = value._module.args.modules ++ [{
-          deployment = config.colmena-parts.deployment.${name};
+          deployment = config.colmena-flake.deployment.${name};
         }];
       })
       (lib.filterAttrs
-        (k: _: lib.hasAttr k config.colmena-parts.deployment)
+        (k: _: lib.hasAttr k config.colmena-flake.deployment)
         self.nixosConfigurations);
   };
 }
