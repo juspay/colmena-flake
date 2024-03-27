@@ -2,11 +2,7 @@
 
 # colmena-flake
 
-A `flake-parts` module for [colmena](https://github.com/zhaofengli/colmena) deployment tool
-
-## Why
-
-- Re-use an existing `nixosConfigurations`
+A `flake-parts` module for [colmena](https://github.com/zhaofengli/colmena) deployment tool, allowing direct use of existing `nixosConfigurations` (with the associated tradeoffs).
 
 ## How to use
 
