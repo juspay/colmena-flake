@@ -1,5 +1,8 @@
 [![project chat](https://img.shields.io/badge/zulip-join_chat-brightgreen.svg)](https://nixos.zulipchat.com/#narrow/stream/413949-haskell-flake)
 
+> [!IMPORTANT]  
+> We now use & recommend [`nixos-unified`'s remote activation](https://nixos-unified.org/activate.html#remote) instead of colmena.
+
 # colmena-flake
 
 A `flake-parts` module for [colmena](https://github.com/zhaofengli/colmena) deployment tool, allowing direct use of existing `nixosConfigurations` (with the associated tradeoffs).
